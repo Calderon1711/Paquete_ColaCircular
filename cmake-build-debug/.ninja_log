@@ -1,0 +1,13 @@
+# ninja log v6
+5	1677	7781291378110364	CMakeFiles/ColaCircular.dir/main.cpp.obj.ddi	a2cb8d69594f7f7e
+1678	1727	7781291395345640	CMakeFiles/ColaCircular.dir/CXX.dd	3ec4707b5122f421
+1678	1727	7781291395345640	C:/Users/aleca/Downloads/Estructura de Datos/ColaCircular/cmake-build-debug/CMakeFiles/ColaCircular.dir/CXXModules.json	3ec4707b5122f421
+1678	1727	7781291395345640	CMakeFiles/ColaCircular.dir/main.cpp.obj.modmap	3ec4707b5122f421
+1728	2294	7781291395400494	CMakeFiles/ColaCircular.dir/main.cpp.obj	ab275cb7e389bb5
+2296	2752	7781291401073186	ColaCircular.exe	a4a699e206567611
+9	258	7781292641742499	CMakeFiles/ColaCircular.dir/main.cpp.obj.ddi	a2cb8d69594f7f7e
+262	324	7781292644271114	CMakeFiles/ColaCircular.dir/CXX.dd	3ec4707b5122f421
+262	324	7781292644271114	C:/Users/aleca/Downloads/Estructura de Datos/ColaCircular/cmake-build-debug/CMakeFiles/ColaCircular.dir/CXXModules.json	3ec4707b5122f421
+262	324	7781292644271114	CMakeFiles/ColaCircular.dir/main.cpp.obj.modmap	3ec4707b5122f421
+325	1124	7781292644900046	CMakeFiles/ColaCircular.dir/main.cpp.obj	ab275cb7e389bb5
+1124	1224	7781292652897564	ColaCircular.exe	a4a699e206567611

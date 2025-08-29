@@ -22,11 +22,15 @@ private:
     int cantidad;
     int tam=10;
 public:
-    ColaCircular() : frente(nullptr), final(nullptr) {}
+    ColaCircular(int t) : frente(nullptr), final(nullptr)
+    {
+        cantidad = 0;
+        tam = t;
+    }
 
     ~ColaCircular() {
         while (!estaVacia()) {
-            desencolar();
+            quitar();
         }
     }
 
@@ -47,38 +51,94 @@ public:
         }
 
         // Si todavía no llegó al máximo → hay campo
-        return (contador < MAX);
+        return (contador < tam);
     }
 
-    void meter(const Paquete& p, ColaEspera& e)
-    {
-        if (verificarEspacio())
-        {
-            Nodo* nuevo = new Nodo{p, nullptr};
-            if (e.verificarEspacio()){
+    Paquete quitar() {
+        //verifico si esta vacia, y si est amando paquete vacio
+        if (estaVacia()) {
+            cout << " Cola vacia, no se puede quitar" << endl;
+            return Paquete(); // devuelve un paquete vacío
+        }
+        //asigno el valor del paquete del frente es el q moveremos a la lista de espera
+        Paquete valor = frente->paquete;
 
+        if (frente == final) {
+            // si solo había un elemento
+            delete frente;
+            frente=nullptr;
+            final = nullptr;
+
+        } else {
+            Nodo* temp = frente;
+            frente = frente->siguiente;    // el frente avanza
+            final->siguiente = frente;
+            delete temp;
+        }
+
+        cantidad--;
+        return valor;
+    }
+
+
+    void meter(const Paquete& p, ColaEspera& e) {
+        //verifico si hay espacio
+        if (verificarEspacio()) {
+            // Aún hay espacio en la circular
+            Nodo* nuevo = new Nodo{p, nullptr};
+
+            if (estaVacia()) {
+                // la circular estaba vacía
+                frente = final = nuevo;
+                final->siguiente = frente;
+            } else {
+                // insertar al final
+                final->siguiente = nuevo;
+                final = nuevo;
+                final->siguiente = frente;
+            }
+            cantidad++;
+        } else {
+
+            if (e.verificarEspacio()) {
+                // hay campo en la cola de espera
+                // mover el primer elemento de circular aespera
+                Paquete mover = quitar();
+                e.encolar(mover);
+
+                // ahora sí insertar el nuevo paquete al final de la circular
+                Nodo* nuevo = new Nodo{p, nullptr};
                 if (estaVacia()) {
                     frente = final = nuevo;
-                    final->siguiente = frente;  // circularidad
+                    final->siguiente = frente;
                 } else {
                     final->siguiente = nuevo;
                     final = nuevo;
-                    final->siguiente = frente;  // mantener circularidad
+                    final->siguiente = frente;
                 }
-                size++; // aumentamos el contador
-            } else
-            {
-                // Si la cola está llena, mandar el paquete a la cola de espera
-                e.encolar(p);
+                cantidad++;
+            } else {
+                cout << " No hay espacio ni en la circular ni en la cola de espera" << endl;
             }
         }
-
     }
 
-    //if(primero verificamos si hay campo en la circular){
-    //insertar
+    void mostrar() const {
+        //si esta vacia
+        if (estaVacia()) {
+            cout << "Cola circular vacía" << endl;
+            return;
+        }
 
-    //}else if(verificmos si en la de esper`a hay campo){
+        cout << "Contenido de la cola circular:" << endl;
+
+        Nodo* actual = frente;
+        // recorrer hasta volver al frente
+        do {
+            actual->paquete.mostrar(); // reutilzao el mostrar de paquete
+            actual = actual->siguiente;
+        } while (actual != frente);
+    }
 
 
 
